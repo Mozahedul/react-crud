@@ -1,23 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "reactstrap";
-// import { useStateValue } from "../context/GlobalState";
+import { useStateValue } from "../context/GlobalState";
 
 const UserList = ({ name, id }) => {
-  // const [{ todoList }] = useStateValue();
-  // console.log(todoList);
+  const [, dispatch] = useStateValue();
+  const removeUser = () => {
+    dispatch({
+      type: "REMOVE_USER",
+      payload: id,
+    });
+  };
+
+  const editUser = () => {
+    dispatch({
+      type: "EDIT_USER",
+      payload: {
+        name,
+        id,
+      },
+    });
+  };
+
   return (
     <ListGroup>
       <ListGroupItem className="d-flex">
-        {/* {todoList.map((itemVal) => (
-          <strong>{itemVal.name}</strong>
-        ))} */}
         <strong>{name}</strong>
         <div className="ml-auto">
-          <Link className="btn btn-warning btn-sm mr-1" to="/edit/1">
+          <Link
+            // onClick={readUser}
+            className="btn btn-success btn-sm mr-1"
+            to={`/read/${id}`}
+          >
+            View
+          </Link>
+          <Link
+            onClick={editUser}
+            className="btn btn-warning btn-sm mr-1"
+            to={`/edit/${id}`}
+          >
             Edit
           </Link>
-          <button className="btn btn-danger btn-sm">Delete</button>
+          <button onClick={removeUser} className="btn btn-danger btn-sm">
+            Delete
+          </button>
         </div>
       </ListGroupItem>
     </ListGroup>

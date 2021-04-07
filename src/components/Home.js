@@ -5,7 +5,6 @@ import UserList from "./UserList";
 
 const Home = () => {
   const [{ todoList }] = useStateValue();
-  console.log(todoList);
   return (
     <div className="Home">
       <Heading />
