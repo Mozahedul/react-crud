@@ -15,15 +15,19 @@ const EditUser = () => {
 
   const updateHandle = (event) => {
     event.preventDefault();
-    dispatch({
-      type: "EDIT_USER",
-      payload: {
-        name: editInput,
-        id: params.id,
-      },
-    });
-    setEditInput("");
-    history.push("/");
+    if (editInput !== "") {
+      dispatch({
+        type: "EDIT_USER",
+        payload: {
+          name: editInput,
+          id: params.id,
+        },
+      });
+      setEditInput("");
+      history.push("/");
+    } else {
+      history.push("/");
+    }
   };
 
   return (
